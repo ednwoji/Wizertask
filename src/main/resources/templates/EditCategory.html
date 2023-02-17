@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Edit Books</title>
+  <link href="/css/dashboard.css" rel="stylesheet">
+  <link href="/css/bootstrap/css/bootstrap.css" rel="stylesheet" >
+  <!--    <link href="/css/bootstrap/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">-->
+  <link href="/css/FontAwesome/css/all.css" rel="stylesheet">
+  <link href="/css/FontAwesome/css/font-awesome.css" rel="stylesheet">
+
+  <!--    <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">-->
+  <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+  <!--    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>-->
+
+  <script src="/css/bootstrap/js/bootstrap.min.js"></script>
+
+  <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
+
+
+</head>
+
+<body>
+
+<div id="viewport">
+  <!-- Sidebar -->
+  <div id="sidebar">
+    <header>
+      <a href="#">Books Application</a>
+    </header>
+    <ul class="nav" >
+      <li class="active">
+        <a th:href="@{/web/home}">
+          <i class="zmdi zmdi-view-dashboard"></i> View Category
+        </a>
+      </li>
+      <li >
+        <a th:href="@{/web/books}">
+          <i class="zmdi zmdi-link"></i> View Books
+        </a>
+      </li>
+
+      <li>
+        <a th:href="@{/web/create-book}">
+          <i class="zmdi zmdi-link"></i> Add Books
+        </a>
+      </li>
+
+      <li>
+        <a th:href="@{/web/create-category}">
+          <i class="zmdi zmdi-link"></i> Add Category
+        </a>
+      </li>
+
+      <li>
+        <a th:href="@{/web/favourites}">
+          <i class="zmdi zmdi-link"></i> View Favourites
+        </a>
+      </li>
+
+
+    </ul>
+
+
+
+
+  </div>
+  <!-- Content -->
+  <div id="content">
+    <nav class="navbar navbar-default">
+    </nav>
+
+    <div class="container-fluid">
+
+      <div th:if="${success != null}">
+        <div class="alert alert-info text-center border border-info">
+          <b th:text="${success}"/>
+        </div>
+      </div>
+
+
+      <form action="#" th:object="${fetchedcategory}" th:action="@{/web/updatecategory}"  method="POST">
+
+        <input class="form-control" type="hidden" th:field="*{categoryId}" id="categoryId" value="th:text=${fetchedcategory.categoryId}" autocomplete="off" required>
+
+
+        <div class="form-group">
+          <label for="categoryName">Category Name</label>
+          <input class="form-control" type="text" th:field="*{categoryName}" id="categoryName" value="th:text=${fetchedcategory.bookName}" placeholder="Name of Category" autocomplete="off" required>
+        </div>
+
+
+        <button type="submit" class="btn btn-success">Update Category!</button>
+      </form>
+
+
+
+    </div>
+
+  </div>
+</div>
+
+
+
+</body>
+
+</html>

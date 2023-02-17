@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Books</title>
+  <link href="/css/dashboard.css" rel="stylesheet">
+  <link href="/css/bootstrap/css/bootstrap.css" rel="stylesheet" >
+  <!--    <link href="/css/bootstrap/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">-->
+  <link href="/css/FontAwesome/css/all.css" rel="stylesheet">
+  <link href="/css/FontAwesome/css/font-awesome.css" rel="stylesheet">
+
+  <!--    <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">-->
+  <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+  <!--    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>-->
+
+  <script src="/css/bootstrap/js/bootstrap.min.js"></script>
+
+  <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
+
+
+</head>
+
+<body>
+
+<div id="viewport">
+  <!-- Sidebar -->
+  <div id="sidebar">
+    <header>
+      <a href="#">Books Application</a>
+    </header>
+    <ul class="nav" >
+      <li>
+        <a th:href="@{/web/home}">
+          <i class="zmdi zmdi-view-dashboard"></i> View Category
+        </a>
+      </li>
+      <li class="active">
+        <a th:href="@{/web/books}">
+          <i class="zmdi zmdi-link"></i> View Books
+        </a>
+      </li>
+
+      <li>
+        <a th:href="@{/web/create-book}">
+          <i class="zmdi zmdi-link"></i> Add Books
+        </a>
+      </li>
+
+      <li>
+        <a th:href="@{/web/create-category}">
+          <i class="zmdi zmdi-link"></i> Add Category
+        </a>
+      </li>
+
+    </ul>
+
+
+
+
+  </div>
+  <!-- Content -->
+  <div id="content">
+    <nav class="navbar navbar-default">
+    </nav>
+
+    <div class="container-fluid">
+
+      <div th:if="${success != null}">
+        <div class="alert alert-info text-center border border-info">
+          <b th:text="${success}"/>
+        </div>
+      </div>
+
+
+      <div th:if="${books != null}">
+
+        <div class="container">
+          <table class="table table-bordered table-striped">
+
+            <thead>
+
+            <tr>
+              <th>Name of Book</th>
+              <th>Author</th>
+              <th>Category</th>
+              <th>Date of Release</th>
+            </tr>
+
+            </thead>
+            <tbody>
+            <tr th:each="item : ${books}">
+
+              <td th:text="${item.bookName}"></td>
+              <td th:text="${item.author}"></td>
+              <td th:text="${item.categoryName}"></td>
+              <td th:text="${item.yearOfRelease}"></td>
+              <td>
+
+                <div role="group">
+                  <a th:href="@{/web/edit/{id}(id=${item.bookId})}" class="btn btn-group-sm" th:text="Edit"></a>
+                  <a th:href="@{/web/favourites/{id}(id=${item.bookId})}" class="btn btn-group-sm" th:method="get" th:text="Favourites"></a>
+                  <a th:href="@{/web/deletebooks/{id}(id=${item.bookId})}" onclick="return confirm('Do you want to Delete the Category?', 'yes');" class="btn btn-group-sm" th:method="get" th:text="Delete"></a>
+                </div>
+
+
+              </td>
+            </tr>
+            </tbody>
+
+            </thead>
+
+          </table>
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+
+</body>
+
+</html>
